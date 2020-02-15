@@ -14,7 +14,8 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
-
+private slots:
+        void print_lable();
 private:
     Ui::MainWindow *ui;
 };
