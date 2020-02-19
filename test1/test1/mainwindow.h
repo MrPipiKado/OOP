@@ -2,8 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include <string>
-#include <QString>
+
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
@@ -16,16 +15,10 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 private slots:
-    void event_headler();
-    void undo();
-    void answer();
-    void clear();
-    void unar_func_h();
-    void exit();
+    void change_healder();
+    void edit_healder();
 
 private:
-    std::string result;
-    QString toShow;
     Ui::MainWindow *ui;
 };
 #endif // MAINWINDOW_H
