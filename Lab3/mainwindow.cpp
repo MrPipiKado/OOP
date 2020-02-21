@@ -13,8 +13,10 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
     isSaved = true;
-    connect(ui->textEdit, SIGNAL(textChanged()), this, SLOT(change_headler()));
+    file_name = "New.txt";
+    setWindowTitle("New.txt");
 
+    connect(ui->textEdit, SIGNAL(textChanged()), this, SLOT(change_headler()));
 }
 
 MainWindow::~MainWindow()
@@ -56,6 +58,9 @@ void MainWindow::on_actionSave_triggered()
         output << ui->textEdit->toPlainText();
         FILE.flush();
         FILE.close();
+
+        this->setWindowTitle(file_name);
+        this->isSaved = true;
     }
     else
     {
@@ -65,8 +70,9 @@ void MainWindow::on_actionSave_triggered()
 
 void MainWindow::on_actionNew_file_triggered()
 {
-    this->file_name = "";
+    this->file_name = "New.txt*";
     this->ui->textEdit->setPlainText("");
+    this->setWindowTitle(file_name);
 
 }
 
@@ -79,11 +85,13 @@ void MainWindow::on_actionSave_as_triggered()
         this->file_name = file;
         on_actionSave_triggered();
     }
+    this->setWindowTitle(file_name);
 }
 
 void MainWindow::change_headler()
 {
     this->isSaved = false;
+    this->setWindowTitle((file_name + "*"));
 }
 
 void MainWindow::closeEvent(QCloseEvent *event)
@@ -108,4 +116,9 @@ void MainWindow::closeEvent(QCloseEvent *event)
             event->accept();
         }
     }
+}
+
+void MainWindow::on_actionHelp_triggered()
+{
+    QMessageBox::information(this, "Help", "");
 }

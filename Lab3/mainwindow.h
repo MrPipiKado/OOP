@@ -28,6 +28,9 @@ private slots:
     void on_actionNew_file_triggered();
 
     void change_headler();
+
+    void on_actionHelp_triggered();
+
 private:
     Ui::MainWindow *ui;
     QString file_name;
