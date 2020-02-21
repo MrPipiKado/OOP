@@ -15,8 +15,8 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
-
-public slots:
+protected:
+    void closeEvent(QCloseEvent *event);
 
 private slots:
     void on_actionOpen_file_triggered();
@@ -27,8 +27,10 @@ private slots:
 
     void on_actionNew_file_triggered();
 
+    void change_headler();
 private:
     Ui::MainWindow *ui;
     QString file_name;
+    bool isSaved;
 };
 #endif // MAINWINDOW_H

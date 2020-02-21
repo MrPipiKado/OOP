@@ -6,11 +6,15 @@
 #include <QtCore>
 #include <QtGui>
 #include <QFile>
+#include <QCloseEvent>
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    isSaved = true;
+    connect(ui->textEdit, SIGNAL(textChanged()), this, SLOT(change_headler()));
+
 }
 
 MainWindow::~MainWindow()
@@ -74,5 +78,34 @@ void MainWindow::on_actionSave_as_triggered()
     {
         this->file_name = file;
         on_actionSave_triggered();
+    }
+}
+
+void MainWindow::change_headler()
+{
+    this->isSaved = false;
+}
+
+void MainWindow::closeEvent(QCloseEvent *event)
+{
+    if(!this->isSaved)
+    {
+        QMessageBox::StandardButton resBtn = QMessageBox::question( this, "NotePade",
+                                                                tr("Exit without saving?\n"),
+                                                                QMessageBox::Cancel | QMessageBox::Save | QMessageBox::Yes,
+                                                                QMessageBox::Save);
+        if (resBtn == QMessageBox::No)
+        {
+            event->ignore();
+        }
+        else if(resBtn == QMessageBox::Save)
+        {
+            this->on_actionSave_as_triggered();
+            event->accept();
+        }
+        else
+        {
+            event->accept();
+        }
     }
 }
