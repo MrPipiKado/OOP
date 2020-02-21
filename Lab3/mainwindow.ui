@@ -18,6 +18,19 @@
     <item>
      <widget class="QTextEdit" name="textEdit"/>
     </item>
+    <item>
+     <widget class="QLabel" name="Image">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+    </item>
    </layout>
   </widget>
   <widget class="QMenuBar" name="menubar">
@@ -37,6 +50,7 @@
     <addaction name="actionOpen_file"/>
     <addaction name="actionSave"/>
     <addaction name="actionSave_as"/>
+    <addaction name="actionChange_Mode"/>
    </widget>
    <widget class="QMenu" name="menuHelp">
     <property name="title">
@@ -45,11 +59,27 @@
     <addaction name="actionHelp"/>
     <addaction name="actionAbout"/>
    </widget>
+   <widget class="QMenu" name="menuEdit">
+    <property name="title">
+     <string>Edit</string>
+    </property>
+    <addaction name="actionCopy"/>
+    <addaction name="actionCut"/>
+    <addaction name="actionPaste"/>
+    <addaction name="separator"/>
+    <addaction name="actionUndo"/>
+    <addaction name="actionRedo"/>
+   </widget>
    <addaction name="menuFile"/>
+   <addaction name="menuEdit"/>
    <addaction name="menuHelp"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <action name="actionNew_file">
+   <property name="icon">
+    <iconset resource="AppResources.qrc">
+     <normaloff>:/Images/New.png</normaloff>:/Images/New.png</iconset>
+   </property>
    <property name="text">
     <string>New file...</string>
    </property>
@@ -67,6 +97,10 @@
    </property>
   </action>
   <action name="actionOpen_file">
+   <property name="icon">
+    <iconset resource="AppResources.qrc">
+     <normaloff>:/Images/Open.jpeg</normaloff>:/Images/Open.jpeg</iconset>
+   </property>
    <property name="text">
     <string>Open file...</string>
    </property>
@@ -75,6 +109,10 @@
    </property>
   </action>
   <action name="actionSave">
+   <property name="icon">
+    <iconset resource="AppResources.qrc">
+     <normaloff>:/Images/Save.png</normaloff>:/Images/Save.png</iconset>
+   </property>
    <property name="text">
     <string>Save</string>
    </property>
@@ -83,6 +121,10 @@
    </property>
   </action>
   <action name="actionSave_as">
+   <property name="icon">
+    <iconset resource="AppResources.qrc">
+     <normaloff>:/Images/SaveAs.png</normaloff>:/Images/SaveAs.png</iconset>
+   </property>
    <property name="text">
     <string>Save as...</string>
    </property>
@@ -91,6 +133,10 @@
    </property>
   </action>
   <action name="actionHelp">
+   <property name="icon">
+    <iconset resource="AppResources.qrc">
+     <normaloff>:/Images/Help.jpg</normaloff>:/Images/Help.jpg</iconset>
+   </property>
    <property name="text">
     <string>Help</string>
    </property>
@@ -99,6 +145,10 @@
    </property>
   </action>
   <action name="actionAbout">
+   <property name="icon">
+    <iconset resource="AppResources.qrc">
+     <normaloff>:/Images/About.png</normaloff>:/Images/About.png</iconset>
+   </property>
    <property name="text">
     <string>About</string>
    </property>
@@ -106,7 +156,62 @@
     <string>Ctrl+A</string>
    </property>
   </action>
+  <action name="actionCopy">
+   <property name="icon">
+    <iconset resource="AppResources.qrc">
+     <normaloff>:/Images/Copy.png</normaloff>:/Images/Copy.png</iconset>
+   </property>
+   <property name="text">
+    <string>Copy...</string>
+   </property>
+  </action>
+  <action name="actionCut">
+   <property name="icon">
+    <iconset resource="AppResources.qrc">
+     <normaloff>:/Images/Cut.jpg</normaloff>:/Images/Cut.jpg</iconset>
+   </property>
+   <property name="text">
+    <string>Cut...</string>
+   </property>
+  </action>
+  <action name="actionPaste">
+   <property name="icon">
+    <iconset resource="AppResources.qrc">
+     <normaloff>:/Images/Paste.png</normaloff>:/Images/Paste.png</iconset>
+   </property>
+   <property name="text">
+    <string>Paste...</string>
+   </property>
+  </action>
+  <action name="actionUndo">
+   <property name="icon">
+    <iconset resource="AppResources.qrc">
+     <normaloff>:/Images/Undo.jpg</normaloff>:/Images/Undo.jpg</iconset>
+   </property>
+   <property name="text">
+    <string>Undo</string>
+   </property>
+  </action>
+  <action name="actionRedo">
+   <property name="icon">
+    <iconset resource="AppResources.qrc">
+     <normaloff>:/Images/Redo.png</normaloff>:/Images/Redo.png</iconset>
+   </property>
+   <property name="text">
+    <string>Redo</string>
+   </property>
+  </action>
+  <action name="actionChange_Mode">
+   <property name="text">
+    <string>Change Mode</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Shift+A</string>
+   </property>
+  </action>
  </widget>
- <resources/>
+ <resources>
+  <include location="AppResources.qrc"/>
+ </resources>
  <connections/>
 </ui>

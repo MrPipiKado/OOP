@@ -31,9 +31,26 @@ private slots:
 
     void on_actionHelp_triggered();
 
+    void on_actionAbout_triggered();
+
+    void on_actionCopy_triggered();
+
+    void on_actionCut_triggered();
+
+    void on_actionPaste_triggered();
+
+    void on_actionUndo_triggered();
+
+    void on_actionRedo_triggered();
+
+    void on_actionChange_Mode_triggered();
+
 private:
     Ui::MainWindow *ui;
     QString file_name;
+    enum MODES {TEXT, IMAGE};
     bool isSaved;
+    QImage image;
+    MODES mode;
 };
 #endif // MAINWINDOW_H

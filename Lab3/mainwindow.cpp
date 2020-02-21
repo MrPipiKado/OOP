@@ -7,16 +7,21 @@
 #include <QtGui>
 #include <QFile>
 #include <QCloseEvent>
+#include <QImage>
+#include <QPixmap>
+
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
     isSaved = true;
-    file_name = "New.txt";
-    setWindowTitle("New.txt");
+    file_name = "";
+    setWindowTitle("Simple Editor");
 
     connect(ui->textEdit, SIGNAL(textChanged()), this, SLOT(change_headler()));
+    ui->Image->setVisible(false);
+    mode = TEXT;
 }
 
 MainWindow::~MainWindow()
@@ -25,24 +30,48 @@ MainWindow::~MainWindow()
 }
 
 void MainWindow::on_actionOpen_file_triggered()
-{    
-    QString file = QFileDialog::getOpenFileName(this,
-            tr("Open File"));
-    if (!file.isEmpty())
+{
+    if(this->mode==TEXT)
     {
-        QFile FILE(file);
-        if(FILE.open(QFile::ReadOnly | QFile::Text))
+        QString file = QFileDialog::getOpenFileName(this,
+                tr("Open File"), "Text file(*.txt)");
+        if (!file.isEmpty())
         {
-            this->file_name = file;
-            QTextStream input(&FILE);
-            QString text = input.readAll();
-            this->ui->textEdit->setPlainText(text);
-            FILE.close();
+            QFile FILE(file);
+            if(FILE.open(QFile::ReadOnly | QFile::Text))
+            {
+                this->file_name = file;
+                QTextStream input(&FILE);
+                QString text = input.readAll();
+                this->ui->textEdit->setPlainText(text);
+                FILE.close();
+            }
+            else
+            {
+                QMessageBox::information(this, tr("Unable to open file"),
+                FILE.errorString());
+                return;
+            }
+        }
+    }
+    else
+    {
+        QString file = QFileDialog::getOpenFileName(this,
+                                                    tr("Open File"),
+                                                    "Images (*.png, *.img, *.jpeg, *.bmp");
+        if(!file.isEmpty())
+        {
+            bool valid = image.load(file);
+            if(valid)
+            {
+                image = image.scaledToWidth(ui->Image->width(), Qt::SmoothTransformation);
+                ui->Image->setPixmap(QPixmap::fromImage(image));
+            }
         }
         else
         {
             QMessageBox::information(this, tr("Unable to open file"),
-            FILE.errorString());
+            file);
             return;
         }
     }
@@ -82,8 +111,15 @@ void MainWindow::on_actionSave_as_triggered()
             tr("Open File"));
     if (!file.isEmpty())
     {
-        this->file_name = file;
-        on_actionSave_triggered();
+        if(mode==TEXT)
+        {
+            this->file_name = file;
+            on_actionSave_triggered();
+        }
+        else
+        {
+            image.save(file);
+        }
     }
     this->setWindowTitle(file_name);
 }
@@ -120,5 +156,72 @@ void MainWindow::closeEvent(QCloseEvent *event)
 
 void MainWindow::on_actionHelp_triggered()
 {
-    QMessageBox::information(this, "Help", "");
+    QMessageBox::information(this, "Help", "\"New file\" Ctrl+n to create new\n"
+                             "\"Open file\" Ctrl+o to open file\n"
+                             "\"Save\" Ctrl+s to save with current name\n"
+                             "\"Save as\" Ctrl+Shift+s to save file in a different location\n"
+                             "\"Change mode\" Ctrl+Shift+a switch to other mode");
+}
+
+void MainWindow::on_actionAbout_triggered()
+{
+    QMessageBox::information(this, "About", "Simple Editor\n"
+                                   "Developed by MrPipiKado\n"
+                             "Search for source code here:\n"
+                             "https://github.com/MrPipiKado");
+}
+
+void MainWindow::on_actionCopy_triggered()
+{
+    this->ui->textEdit->copy();
+}
+
+void MainWindow::on_actionCut_triggered()
+{
+    this->ui->textEdit->cut();
+}
+
+void MainWindow::on_actionPaste_triggered()
+{
+    this->ui->textEdit->paste();
+}
+
+void MainWindow::on_actionUndo_triggered()
+{
+    this->ui->textEdit->undo();
+}
+
+void MainWindow::on_actionRedo_triggered()
+{
+    this->ui->textEdit->redo();
+}
+
+void MainWindow::on_actionChange_Mode_triggered()
+{
+    if(this->ui->textEdit->isVisible())
+    {
+        this->ui->textEdit->setVisible(false);
+        this->ui->Image->setVisible(true);
+        this->ui->actionNew_file->setEnabled(false);
+        this->ui->actionCut->setEnabled(false);
+        this->ui->actionCopy->setEnabled(false);
+        this->ui->actionPaste->setEnabled(false);
+        this->ui->actionUndo->setEnabled(false);
+        this->ui->actionRedo->setEnabled(false);
+        this->ui->actionSave->setEnabled(true);
+        this->mode = IMAGE;
+    }
+    else
+    {
+        this->ui->textEdit->setVisible(true);
+        this->ui->Image->setVisible(false);
+        this->ui->actionNew_file->setEnabled(true);
+        this->ui->actionCut->setEnabled(true);
+        this->ui->actionCopy->setEnabled(true);
+        this->ui->actionPaste->setEnabled(true);
+        this->ui->actionUndo->setEnabled(true);
+        this->ui->actionRedo->setEnabled(true);
+        this->ui->actionSave->setEnabled(false);
+        this->mode = IMAGE;
+    }
 }
