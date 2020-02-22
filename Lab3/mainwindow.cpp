@@ -45,6 +45,8 @@ void MainWindow::on_actionOpen_file_triggered()
                 QString text = input.readAll();
                 this->ui->textEdit->setPlainText(text);
                 FILE.close();
+
+                this->setWindowTitle(this->file_name);
             }
             else
             {
@@ -88,7 +90,7 @@ void MainWindow::on_actionSave_triggered()
         FILE.flush();
         FILE.close();
 
-        this->setWindowTitle(file_name);
+        this->setWindowTitle(this->file_name);
         this->isSaved = true;
     }
     else
@@ -99,9 +101,9 @@ void MainWindow::on_actionSave_triggered()
 
 void MainWindow::on_actionNew_file_triggered()
 {
-    this->file_name = "New.txt*";
+    this->file_name = "New.txt";
     this->ui->textEdit->setPlainText("");
-    this->setWindowTitle(file_name);
+    this->setWindowTitle(this->file_name);
 
 }
 
@@ -121,24 +123,24 @@ void MainWindow::on_actionSave_as_triggered()
             image.save(file);
         }
     }
-    this->setWindowTitle(file_name);
+    this->setWindowTitle(this->file_name);
 }
 
 void MainWindow::change_headler()
 {
     this->isSaved = false;
-    this->setWindowTitle((file_name + "*"));
+    this->setWindowTitle((this->file_name + "*"));
 }
 
 void MainWindow::closeEvent(QCloseEvent *event)
 {
     if(!this->isSaved)
     {
-        QMessageBox::StandardButton resBtn = QMessageBox::question( this, "NotePade",
+        QMessageBox::StandardButton resBtn = QMessageBox::question( this, "Simple Editor",
                                                                 tr("Exit without saving?\n"),
                                                                 QMessageBox::Cancel | QMessageBox::Save | QMessageBox::Yes,
                                                                 QMessageBox::Save);
-        if (resBtn == QMessageBox::No)
+        if (resBtn == QMessageBox::Cancel)
         {
             event->ignore();
         }
