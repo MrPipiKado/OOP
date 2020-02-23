@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "mylabel.h"
+#include "mypb.h"
 #include <QMessageBox>
 #include <QImage>
 bool MainWindow::is_legal(unsigned int move)
@@ -119,6 +120,16 @@ MainWindow::MainWindow(QWidget *parent)
     this->board[6] = ui->label_6;
     this->board[7] = ui->label_7;
     this->board[8] = ui->label_8;
+    this->buttons[0] = ui->pushButton_0;
+    this->buttons[1] = ui->pushButton_1;
+    this->buttons[2] = ui->pushButton_2;
+    this->buttons[3] = ui->pushButton_3;
+    this->buttons[4] = ui->pushButton_4;
+    this->buttons[5] = ui->pushButton_5;
+    this->buttons[6] = ui->pushButton_6;
+    this->buttons[7] = ui->pushButton_7;
+    this->buttons[8] = ui->pushButton_8;
+
     this->ui->line->setVisible(false);
     this->ui->line_2->setVisible(false);
     this->ui->line_3->setVisible(false);
@@ -133,9 +144,10 @@ MainWindow::MainWindow(QWidget *parent)
     this->ui->line_12->setVisible(false);
     for(int i = 0; i<9; ++i)
     {
-        board[i]->number = i;
+        buttons[i]->setVisible(false);
         board[i]->setVisible(false);
-        connect(this->board[i], SIGNAL(clicked()), this, SLOT(label_clicked()));
+        buttons[i]->number = i;
+        connect(this->buttons[i], SIGNAL(clicked()), this, SLOT(label_clicked()));
     }
     connect(this->ui->pushButton, SIGNAL(clicked()), this, SLOT(start()));
 }
@@ -147,9 +159,12 @@ MainWindow::~MainWindow()
 
 unsigned int MainWindow::label_clicked()
 {
+    bool human_move = false;
     QImage image;
-    MyLabel *lable = (MyLabel*)sender();
-    unsigned int move = lable->number;
+    MYPB *button = (MYPB*)sender();
+    button->setVisible(false);
+    unsigned int move = button->number;
+    board[move]->setVisible(true);
                     if(is_legal(move))
                     {
                         board_vect[move] = human;
@@ -160,10 +175,11 @@ unsigned int MainWindow::label_clicked()
 
                         image = image.scaledToWidth(board[move]->width(), Qt::SmoothTransformation);
                         board[move]->setPixmap(QPixmap::fromImage(image));
+                        human_move = true;
                     }
                     else
                     {
-                        return -1;
+                        return 2;
                     }
                     if (winner()==human)
                     {
@@ -180,70 +196,92 @@ unsigned int MainWindow::label_clicked()
                         else if(resBtn == QMessageBox::Yes)
                         {
                             start();
-                            return -1;
+                            return 2;
                         }
 
                     }
+                    else if(winner()==computer)
+                         {
+                              QMessageBox::StandardButton resBtn =
+                              QMessageBox::question( this, "WINNER",
+                                             tr( "Computer wins\n"
+                                             "Do you want to play again?\n"),
+                                             QMessageBox::Yes | QMessageBox::No,
+                                             QMessageBox::Yes);
+                                    if (resBtn == QMessageBox::No)
+                                    {
+                                        this->close();
+                                    }
+                                    else if(resBtn == QMessageBox::Yes)
+                                    {
+                                        start();
+                                        return 2;
+                                    }
+                           }
                     else if(winner()==TIE)
-                    {
-                        QMessageBox::StandardButton resBtn =
-                        QMessageBox::question( this, "TIE",
-                                               tr( "It's a tie\n"
-                                                   "Do you want to play again?\n"),
-                                               QMessageBox::Yes | QMessageBox::No,
-                                               QMessageBox::Yes);
-                        if (resBtn == QMessageBox::No)
-                        {
-                            this->close();
-                        }
-                        else if(resBtn == QMessageBox::Yes)
-                        {
-                            start();
-                            return -1;
-                        }
+                           {
+                                    QMessageBox::StandardButton resBtn =
+                                    QMessageBox::question( this, "TIE",
+                                                           tr( "It's a tie\n"
+                                                               "Do you want to play again?\n"),
+                                                           QMessageBox::Yes | QMessageBox::No,
+                                                           QMessageBox::Yes);
+                                    if (resBtn == QMessageBox::No)
+                                    {
+                                        this->close();
+                                    }
+                                    else if(resBtn == QMessageBox::Yes)
+                                    {
+                                        start();
+                                        return 2;
+                                    }
                     }
-                    move = computer_move();
-                    board_vect[move] = computer;
-                    if(computer==O)
-                        image.load(":/Images/Zero.png");
-                    else
-                        image.load(":/Images/Cross.png");
-
-                    image = image.scaledToWidth(board[move]->width(), Qt::SmoothTransformation);
-                    board[move]->setPixmap(QPixmap::fromImage(image));
-                    if(winner()==computer)
+                    if(human_move)
                     {
-                         QMessageBox::StandardButton resBtn =
-                                 QMessageBox::question( this, "WINNER",
-                                               tr( "Computer wins\n"
-                                                   "Do you want to play again?\n"),
-                                               QMessageBox::Yes | QMessageBox::No,
-                                               QMessageBox::Yes);
-                        if (resBtn == QMessageBox::No)
+                        move = computer_move();
+                        board_vect[move] = computer;
+                        if(computer==O)
+                            image.load(":/Images/Zero.png");
+                        else
+                            image.load(":/Images/Cross.png");
+                        buttons[move]->setVisible(false);
+                        board[move]->setVisible(true);
+                        image = image.scaledToWidth(board[move]->width(), Qt::SmoothTransformation);
+                        board[move]->setPixmap(QPixmap::fromImage(image));
+                        if(winner()==computer)
                         {
-                            this->close();
-                        }
-                        else if(resBtn == QMessageBox::Yes)
+                             QMessageBox::StandardButton resBtn =
+                                     QMessageBox::question( this, "WINNER",
+                                                   tr( "Computer wins\n"
+                                                       "Do you want to play again?\n"),
+                                                   QMessageBox::Yes | QMessageBox::No,
+                                                   QMessageBox::Yes);
+                            if (resBtn == QMessageBox::No)
+                            {
+                                this->close();
+                            }
+                            else if(resBtn == QMessageBox::Yes)
+                            {
+                                start();
+                                return 2;
+                            }
+                        }else if(winner()==TIE)
                         {
-                            start();
-                            return -1;
-                        }
-                    }else if(winner()==TIE)
-                    {
-                        QMessageBox::StandardButton resBtn =
-                        QMessageBox::question( this, "TIE",
-                                               tr( "It's a tie\n"
-                                                   "Do you want to play again?\n"),
-                                               QMessageBox::Yes | QMessageBox::No,
-                                               QMessageBox::Yes);
-                        if (resBtn == QMessageBox::No)
-                        {
-                            this->close();
-                        }
-                        else if(resBtn == QMessageBox::Yes)
-                        {
-                            start();
-                            return -1;
+                            QMessageBox::StandardButton resBtn =
+                            QMessageBox::question( this, "TIE",
+                                                   tr( "It's a tie\n"
+                                                       "Do you want to play again?\n"),
+                                                   QMessageBox::Yes | QMessageBox::No,
+                                                   QMessageBox::Yes);
+                            if (resBtn == QMessageBox::No)
+                            {
+                                this->close();
+                            }
+                            else if(resBtn == QMessageBox::Yes)
+                            {
+                                start();
+                                return 2;
+                            }
                         }
                     }
 
@@ -251,22 +289,29 @@ unsigned int MainWindow::label_clicked()
 
 void MainWindow::start()
 {
-    this->ui->pushButton->setVisible(false);
-    this->ui->line->setVisible(true);
-    this->ui->line_2->setVisible(true);
-    this->ui->line_3->setVisible(true);
-    this->ui->line_4->setVisible(true);
-    this->ui->line_5->setVisible(true);
-    this->ui->line_6->setVisible(true);
-    this->ui->line_7->setVisible(true);
-    this->ui->line_8->setVisible(true);
-    this->ui->line_9->setVisible(true);
-    this->ui->line_10->setVisible(true);
-    this->ui->line_11->setVisible(true);
-    this->ui->line_12->setVisible(true);
+    if(this->ui->pushButton->isVisible())
+    {
+        this->ui->pushButton->setVisible(false);
+        this->ui->line->setVisible(true);
+        this->ui->line_2->setVisible(true);
+        this->ui->line_3->setVisible(true);
+        this->ui->line_4->setVisible(true);
+        this->ui->line_5->setVisible(true);
+        this->ui->line_6->setVisible(true);
+        this->ui->line_7->setVisible(true);
+        this->ui->line_8->setVisible(true);
+        this->ui->line_9->setVisible(true);
+        this->ui->line_10->setVisible(true);
+        this->ui->line_11->setVisible(true);
+        this->ui->line_12->setVisible(true);
+    }
+
     board_vect.clear();
     for(int i = 0; i<9; ++i)
-        board[i]->setVisible(true);
+    {
+        board[i]->setVisible(false);
+        buttons[i]->setVisible(true);
+    }
     QImage image;
     image.load(":/Images/Square.png");
     for(int i = 0; i<9; ++i)
@@ -275,7 +320,7 @@ void MainWindow::start()
         board_vect.push_back(' ');
         image = image.scaledToWidth(board[i]->width(), Qt::SmoothTransformation);
         board[i]->setPixmap(QPixmap::fromImage(image));
-        connect(this->board[i], SIGNAL(clicked()), this, SLOT(label_clicked()));
+        connect(this->buttons[i], SIGNAL(clicked()), this, SLOT(label_clicked()));
     }
         QMessageBox::StandardButton resBtn =
                 QMessageBox::question( this, "Hello",
@@ -289,6 +334,8 @@ void MainWindow::start()
             human = O;
             computer = X;
             move = computer_move();
+            board[move]->setVisible(true);
+            buttons[move]->setVisible(false);
             board_vect[move] = computer;
             image.load(":/Images/Cross.png");
             image = image.scaledToWidth(board[move]->width(), Qt::SmoothTransformation);

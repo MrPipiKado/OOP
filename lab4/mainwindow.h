@@ -4,7 +4,9 @@
 #include <QMainWindow>
 #include <QLabel>
 #include <vector>
+#include <QPushButton>
 #include "mylabel.h"
+#include "mypb.h"
 using namespace std;
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -25,7 +27,8 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
-    MyLabel *board[9];
+    QLabel *board[9];
+    MYPB *buttons[9];
     vector<char> board_vect;
     char human;
     char computer;

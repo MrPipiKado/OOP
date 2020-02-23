@@ -18,11 +18,13 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
     main.cpp \
     mainwindow.cpp \
-    mylabel.cpp
+    mylabel.cpp \
+    mypb.cpp
 
 HEADERS += \
     mainwindow.h \
-    mylabel.h
+    mylabel.h \
+    mypb.h
 
 FORMS += \
     mainwindow.ui
