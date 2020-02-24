@@ -21,6 +21,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     connect(ui->textEdit, SIGNAL(textChanged()), this, SLOT(change_headler()));
     ui->Image->setVisible(false);
+    this->ui->statusbar->showMessage("Text mode");
     mode = TEXT;
 }
 
@@ -212,6 +213,7 @@ void MainWindow::on_actionChange_Mode_triggered()
         this->ui->actionRedo->setEnabled(false);
         this->ui->actionSave->setEnabled(true);
         this->mode = IMAGE;
+        this->ui->statusbar->showMessage("Image mode");
     }
     else
     {
@@ -224,6 +226,7 @@ void MainWindow::on_actionChange_Mode_triggered()
         this->ui->actionUndo->setEnabled(true);
         this->ui->actionRedo->setEnabled(true);
         this->ui->actionSave->setEnabled(false);
-        this->mode = IMAGE;
+        this->mode = TEXT;
+        this->ui->statusbar->showMessage("Text mode");
     }
 }
