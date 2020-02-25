@@ -35,7 +35,7 @@ void MainWindow::on_actionOpen_file_triggered()
     if(this->mode==TEXT)
     {
         QString file = QFileDialog::getOpenFileName(this,
-                tr("Open File"), "Text file(*.txt)");
+                tr("Open File"),"/home", "Text file(*.txt)");
         if (!file.isEmpty())
         {
             QFile FILE(file);
@@ -60,7 +60,7 @@ void MainWindow::on_actionOpen_file_triggered()
     else
     {
         QString file = QFileDialog::getOpenFileName(this,
-                                                    tr("Open File"),
+                                                    tr("Open File"),"/home",
                                                     "Images (*.png, *.img, *.jpeg, *.bmp");
         if(!file.isEmpty())
         {
