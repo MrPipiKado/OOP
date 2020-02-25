@@ -45,6 +45,8 @@ private slots:
 
     void on_actionChange_Mode_triggered();
 
+    void on_actionFind_triggered();
+
 private:
     Ui::MainWindow *ui;
     QString file_name;
@@ -52,5 +54,6 @@ private:
     bool isSaved;
     QImage image;
     MODES mode;
+    bool isFirstTime;
 };
 #endif // MAINWINDOW_H

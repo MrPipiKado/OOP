@@ -9,6 +9,7 @@
 #include <QCloseEvent>
 #include <QImage>
 #include <QPixmap>
+#include <QInputDialog>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -211,6 +212,7 @@ void MainWindow::on_actionChange_Mode_triggered()
         this->ui->actionPaste->setEnabled(false);
         this->ui->actionUndo->setEnabled(false);
         this->ui->actionRedo->setEnabled(false);
+        this->ui->actionFind->setEnabled(false);
         this->ui->actionSave->setEnabled(true);
         this->mode = IMAGE;
         this->ui->statusbar->showMessage("Image mode");
@@ -225,8 +227,58 @@ void MainWindow::on_actionChange_Mode_triggered()
         this->ui->actionPaste->setEnabled(true);
         this->ui->actionUndo->setEnabled(true);
         this->ui->actionRedo->setEnabled(true);
+        this->ui->actionFind->setEnabled(true);
         this->ui->actionSave->setEnabled(false);
         this->mode = TEXT;
         this->ui->statusbar->showMessage("Text mode");
+    }
+}
+
+void MainWindow::on_actionFind_triggered()
+{
+    QString search = QInputDialog::getText(0, "Find in text", "Value:");
+    QTextDocument *document = ui->textEdit->document();
+
+    bool found = false;
+
+    if (isFirstTime == false)
+         document->undo();
+    if (search.isEmpty())
+    {
+        QMessageBox::information(this, tr("Empty Search Field"),
+            "The search field is empty.");
+    }
+    else
+    {
+        QTextCursor highlightCursor(document);
+        QTextCursor cursor(document);
+
+        cursor.beginEditBlock();
+
+        QTextCharFormat plainFormat(highlightCursor.charFormat());
+        QTextCharFormat colorFormat = plainFormat;
+        colorFormat.setForeground(Qt::red);
+
+        while (!highlightCursor.isNull() && !highlightCursor.atEnd())
+        {
+            highlightCursor = document->find(search, highlightCursor, QTextDocument::FindWholeWords);
+
+            if (!highlightCursor.isNull())
+            {
+                 found = true;
+                 highlightCursor.movePosition(QTextCursor::WordRight,
+                                              QTextCursor::KeepAnchor);
+                 highlightCursor.mergeCharFormat(colorFormat);
+            }
+        }
+
+        cursor.endEditBlock();
+        isFirstTime = false;
+
+        if (found == false)
+        {
+            QMessageBox::information(this, tr("Word Not Found"),
+                       "No maching.");
+        }
     }
 }
