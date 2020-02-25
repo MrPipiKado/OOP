@@ -72,20 +72,32 @@
    <property name="text">
     <string>Edit</string>
    </property>
+   <property name="shortcut">
+    <string>Ctrl+E</string>
+   </property>
   </action>
   <action name="actionKeep">
    <property name="text">
     <string>Keep</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+K</string>
    </property>
   </action>
   <action name="actionUndo">
    <property name="text">
     <string>Undo</string>
    </property>
+   <property name="shortcut">
+    <string>Ctrl+Z</string>
+   </property>
   </action>
   <action name="actionRedo">
    <property name="text">
     <string>Redo</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+X</string>
    </property>
   </action>
  </widget>

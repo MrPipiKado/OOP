@@ -1,7 +1,10 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
-
+#include <vector>
+#include <iterator>
 #include <QMainWindow>
+#include <string>
+using namespace std;
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -20,10 +23,17 @@ private slots:
 
     void on_actionKeep_triggered();
 
+    void on_actionUndo_triggered();
+
+    void on_actionRedo_triggered();
+
 public slots:
 
         void contextMenuEvent(QContextMenuEvent *event);
 private:
     Ui::MainWindow *ui;
+
+    vector<string> buffer;
+    vector<string>::iterator current;
 };
 #endif // MAINWINDOW_H
