@@ -236,7 +236,7 @@ void MainWindow::on_actionChange_Mode_triggered()
 
 void MainWindow::on_actionFind_triggered()
 {
-    QString search = QInputDialog::getText(0, "Find in text", "Value:");
+    QString search = QInputDialog::getText(this, "Find in text", "Value:");
     QTextDocument *document = ui->textEdit->document();
 
     bool found = false;

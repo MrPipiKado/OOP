@@ -11,5 +11,6 @@
         <file>Save.png</file>
         <file>About.png</file>
         <file>Help.jpg</file>
+        <file>Find.png</file>
     </qresource>
 </RCC>
