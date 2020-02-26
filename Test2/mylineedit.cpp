@@ -1,6 +1,7 @@
 #include "mylineedit.h"
 
-MyLineEdit::MyLineEdit()
+MyLineEdit::MyLineEdit(QWidget *parent):QLineEdit(parent)
 {
 
 }
+

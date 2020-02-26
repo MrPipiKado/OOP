@@ -1,5 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include "secdialog.h"
 #include <QString>
 #include <QFileDialog>
 #include <QMessageBox>
@@ -33,6 +34,18 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_actionOpen_file_triggered()
 {
+    if(!this->isSaved)
+    {
+        QMessageBox::StandardButton resBtn = QMessageBox::question( this, "Simple Editor",
+                                                                tr("Exit without saving?\n"),
+                                                                QMessageBox::Cancel | QMessageBox::Save | QMessageBox::Yes,
+                                                                QMessageBox::Save);
+       if(resBtn == QMessageBox::Save)
+        {
+            this->on_actionSave_as_triggered();
+        }
+
+    }
     if(this->mode==TEXT)
     {
         QString file = QFileDialog::getOpenFileName(this,
@@ -169,10 +182,14 @@ void MainWindow::on_actionHelp_triggered()
 
 void MainWindow::on_actionAbout_triggered()
 {
-    QMessageBox::information(this, "About", "Simple Editor\n"
+    SecDialog secdialog;
+    secdialog.setModal(true);
+    secdialog.exec();
+
+    /*QMessageBox::information(this, "About", "Simple Editor\n"
                                    "Developed by MrPipiKado\n"
                              "Search for source code here:\n"
-                             "https://github.com/MrPipiKado");
+                             "https://github.com/MrPipiKado");*/
 }
 
 void MainWindow::on_actionCopy_triggered()

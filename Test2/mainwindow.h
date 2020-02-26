@@ -27,6 +27,8 @@ private slots:
 
     void on_actionRedo_triggered();
 
+    void on_lineEdit_customContextMenuRequested(const QPoint &pos);
+
 public slots:
 
         void contextMenuEvent(QContextMenuEvent *event);
@@ -34,6 +36,6 @@ private:
     Ui::MainWindow *ui;
 
     vector<string> buffer;
-    vector<string>::iterator current;
+    int current;
 };
 #endif // MAINWINDOW_H

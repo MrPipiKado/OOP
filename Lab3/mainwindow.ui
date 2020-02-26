@@ -50,7 +50,7 @@
    </property>
    <widget class="QMenu" name="menuFile">
     <property name="title">
-     <string>File</string>
+     <string>&amp;File</string>
     </property>
     <addaction name="actionNew_file"/>
     <addaction name="actionOpen_file"/>
@@ -60,14 +60,14 @@
    </widget>
    <widget class="QMenu" name="menuHelp">
     <property name="title">
-     <string>Help</string>
+     <string>&amp;Help</string>
     </property>
     <addaction name="actionHelp"/>
     <addaction name="actionAbout"/>
    </widget>
    <widget class="QMenu" name="menuEdit">
     <property name="title">
-     <string>Edit</string>
+     <string>&amp;Edit</string>
     </property>
     <addaction name="actionCopy"/>
     <addaction name="actionCut"/>
@@ -110,7 +110,7 @@
      <normaloff>:/Images/New.png</normaloff>:/Images/New.png</iconset>
    </property>
    <property name="text">
-    <string>New file...</string>
+    <string>&amp;New file...</string>
    </property>
    <property name="toolTip">
     <string>Create new file</string>
@@ -131,7 +131,7 @@
      <normaloff>:/Images/Open.jpeg</normaloff>:/Images/Open.jpeg</iconset>
    </property>
    <property name="text">
-    <string>Open file...</string>
+    <string>&amp;Open file...</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+O</string>
@@ -143,7 +143,7 @@
      <normaloff>:/Images/Save.png</normaloff>:/Images/Save.png</iconset>
    </property>
    <property name="text">
-    <string>Save</string>
+    <string>&amp;Save</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+S</string>
@@ -155,7 +155,7 @@
      <normaloff>:/Images/SaveAs.png</normaloff>:/Images/SaveAs.png</iconset>
    </property>
    <property name="text">
-    <string>Save as...</string>
+    <string>Save &amp;as...</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+Shift+S</string>
@@ -167,7 +167,7 @@
      <normaloff>:/Images/Help.jpg</normaloff>:/Images/Help.jpg</iconset>
    </property>
    <property name="text">
-    <string>Help</string>
+    <string>&amp;Help</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+H</string>
@@ -179,7 +179,7 @@
      <normaloff>:/Images/About.png</normaloff>:/Images/About.png</iconset>
    </property>
    <property name="text">
-    <string>About</string>
+    <string>&amp;About</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+A</string>
@@ -191,7 +191,7 @@
      <normaloff>:/Images/Copy.png</normaloff>:/Images/Copy.png</iconset>
    </property>
    <property name="text">
-    <string>Copy...</string>
+    <string>&amp;Copy...</string>
    </property>
   </action>
   <action name="actionCut">
@@ -200,7 +200,7 @@
      <normaloff>:/Images/Cut.jpg</normaloff>:/Images/Cut.jpg</iconset>
    </property>
    <property name="text">
-    <string>Cut...</string>
+    <string>Cu&amp;t...</string>
    </property>
   </action>
   <action name="actionPaste">
@@ -209,7 +209,7 @@
      <normaloff>:/Images/Paste.png</normaloff>:/Images/Paste.png</iconset>
    </property>
    <property name="text">
-    <string>Paste...</string>
+    <string>&amp;Paste...</string>
    </property>
   </action>
   <action name="actionUndo">
@@ -244,7 +244,7 @@
      <normaloff>:/Images/Find.png</normaloff>:/Images/Find.png</iconset>
    </property>
    <property name="text">
-    <string>Find</string>
+    <string>&amp;Find</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+F</string>

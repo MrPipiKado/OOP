@@ -1,13 +1,13 @@
 #ifndef MYLINEEDIT_H
 #define MYLINEEDIT_H
 #include <QLineEdit>
-#include <QMenu>
-#include "mainwindow.h"
+
 class MyLineEdit : public QLineEdit
 {
+    Q_OBJECT
 public:
-    MyLineEdit();
-
+    MyLineEdit(QWidget *parent = nullptr);
+    //void contextMenuEvent(QContextMenuEvent *event);
 };
 
 #endif // MYLINEEDIT_H
