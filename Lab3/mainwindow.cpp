@@ -11,6 +11,7 @@
 #include <QImage>
 #include <QPixmap>
 #include <QInputDialog>
+#include <QApplication>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -23,6 +24,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     connect(ui->textEdit, SIGNAL(textChanged()), this, SLOT(change_headler()));
     ui->Image->setVisible(false);
+    this->ui->actionSave->setEnabled(false);
     this->ui->statusbar->showMessage("Text mode");
     mode = TEXT;
 }
@@ -31,19 +33,20 @@ MainWindow::~MainWindow()
 {
     delete ui;
 }
-
 void MainWindow::on_actionOpen_file_triggered()
 {
     if(!this->isSaved)
     {
         QMessageBox::StandardButton resBtn = QMessageBox::question( this, "Simple Editor",
-                                                                tr("Exit without saving?\n"),
-                                                                QMessageBox::Cancel | QMessageBox::Save | QMessageBox::Yes,
+                                                                tr("Continue without saving?\n"),
+                                                                QMessageBox::Save | QMessageBox::Yes,
                                                                 QMessageBox::Save);
        if(resBtn == QMessageBox::Save)
         {
             this->on_actionSave_as_triggered();
         }
+       else
+           QApplication::quit();
 
     }
     if(this->mode==TEXT)
@@ -60,7 +63,7 @@ void MainWindow::on_actionOpen_file_triggered()
                 QString text = input.readAll();
                 this->ui->textEdit->setPlainText(text);
                 FILE.close();
-
+                this->ui->actionSave->setEnabled(true);
                 this->setWindowTitle(this->file_name);
             }
             else
@@ -75,7 +78,7 @@ void MainWindow::on_actionOpen_file_triggered()
     {
         QString file = QFileDialog::getOpenFileName(this,
                                                     tr("Open File"),"/home",
-                                                    "Images (*.png, *.img, *.jpeg, *.bmp");
+                                                    tr("Image Files (*.png *.jpg *.bmp)"));
         if(!file.isEmpty())
         {
             bool valid = image.load(file);
@@ -116,10 +119,11 @@ void MainWindow::on_actionSave_triggered()
 
 void MainWindow::on_actionNew_file_triggered()
 {
+
     this->file_name = "New.txt";
     this->ui->textEdit->setPlainText("");
     this->setWindowTitle(this->file_name);
-
+    this->ui->actionSave->setEnabled(false);
 }
 
 void MainWindow::on_actionSave_as_triggered()

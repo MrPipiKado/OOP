@@ -6,6 +6,7 @@ SecDialog::SecDialog(QWidget *parent) :
     ui(new Ui::SecDialog)
 {
     ui->setupUi(this);
+    this->setWindowTitle("About");
 }
 
 SecDialog::~SecDialog()
