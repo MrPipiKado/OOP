@@ -177,11 +177,13 @@ void MainWindow::closeEvent(QCloseEvent *event)
 
 void MainWindow::on_actionHelp_triggered()
 {
-    QMessageBox::information(this, "Help", "\"New file\" Ctrl+n to create new\n"
-                             "\"Open file\" Ctrl+o to open file\n"
-                             "\"Save\" Ctrl+s to save with current name\n"
-                             "\"Save as\" Ctrl+Shift+s to save file in a different location\n"
-                             "\"Change mode\" Ctrl+Shift+a switch to other mode");
+    QMessageBox::information(this, "Help", "\"New file\" Ctrl+N to create new\n"
+                             "\"Open file\" Ctrl+O to open file\n"
+                             "\"Save\" Ctrl+S to save with current name\n"
+                             "\"Save as\" Ctrl+Shift+S to save file in a different location\n"
+                             "\"Find\" Ctrl+F to find word or sentence in the text\n"
+                             "\"Change mode\" Ctrl+Shift+A switch to other mode\n"
+                             "\"About\" Ctrl+A information about product and developer\n");
 }
 
 void MainWindow::on_actionAbout_triggered()
@@ -190,10 +192,6 @@ void MainWindow::on_actionAbout_triggered()
     secdialog.setModal(true);
     secdialog.exec();
 
-    /*QMessageBox::information(this, "About", "Simple Editor\n"
-                                   "Developed by MrPipiKado\n"
-                             "Search for source code here:\n"
-                             "https://github.com/MrPipiKado");*/
 }
 
 void MainWindow::on_actionCopy_triggered()
