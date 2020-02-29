@@ -6,8 +6,3 @@ MyLabel::MyLabel(QWidget* parent, Qt::WindowFlags f)
 }
 
 MyLabel::~MyLabel() {}
-
-void MyLabel::mousePressEvent(QMouseEvent *event)
-{
-    emit clicked();
-}
