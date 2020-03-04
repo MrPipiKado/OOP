@@ -47,6 +47,8 @@ private slots:
 
     void on_actionFind_triggered();
 
+    void on_actionChange_font_triggered();
+
 private:
     Ui::MainWindow *ui;
     QString file_name;

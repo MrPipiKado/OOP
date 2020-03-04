@@ -77,6 +77,8 @@
     <addaction name="actionRedo"/>
     <addaction name="separator"/>
     <addaction name="actionFind"/>
+    <addaction name="separator"/>
+    <addaction name="actionChange_font"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuEdit"/>
@@ -97,6 +99,7 @@
    <addaction name="actionOpen_file"/>
    <addaction name="actionSave"/>
    <addaction name="actionSave_as"/>
+   <addaction name="actionChange_font"/>
    <addaction name="actionCopy"/>
    <addaction name="actionCut"/>
    <addaction name="actionPaste"/>
@@ -248,6 +251,15 @@
    </property>
    <property name="shortcut">
     <string>Ctrl+F</string>
+   </property>
+  </action>
+  <action name="actionChange_font">
+   <property name="icon">
+    <iconset resource="AppResources.qrc">
+     <normaloff>:/Images/Font.png</normaloff>:/Images/Font.png</iconset>
+   </property>
+   <property name="text">
+    <string>Change font </string>
    </property>
   </action>
  </widget>

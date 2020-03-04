@@ -12,6 +12,7 @@
 #include <QPixmap>
 #include <QInputDialog>
 #include <QApplication>
+#include <QFontDialog>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -142,6 +143,10 @@ void MainWindow::on_actionSave_as_triggered()
             image.save(file);
         }
     }
+    else
+    {
+        return;
+    }
     this->setWindowTitle(this->file_name);
 }
 
@@ -255,49 +260,59 @@ void MainWindow::on_actionChange_Mode_triggered()
 
 void MainWindow::on_actionFind_triggered()
 {
-    QString search = QInputDialog::getText(this, "Find in text", "Value:");
     QTextDocument *document = ui->textEdit->document();
-
-    bool found = false;
-
-    if (isFirstTime == false)
-         document->undo();
-    if (search.isEmpty())
-    {
-        QMessageBox::information(this, tr("Empty Search Field"),
-            "The search field is empty.");
-    }
-    else
-    {
+        document->clearUndoRedoStacks();
         QTextCursor highlightCursor(document);
         QTextCursor cursor(document);
-
-        cursor.beginEditBlock();
-
         QTextCharFormat plainFormat(highlightCursor.charFormat());
         QTextCharFormat colorFormat = plainFormat;
-        colorFormat.setForeground(Qt::red);
+        colorFormat.clearForeground();
+        bool found = false;
+        bool ok;
+        QString textToFind = QInputDialog::getText(this, "Find text",
+                                                 "Enter text to find", QLineEdit::Normal,
+                                                 "", &ok);
+        if(!ok || textToFind.isEmpty()){
+            QMessageBox::warning(this, "No word found", "NO matches found");
+        } else {
 
-        while (!highlightCursor.isNull() && !highlightCursor.atEnd())
-        {
-            highlightCursor = document->find(search, highlightCursor, QTextDocument::FindWholeWords);
 
-            if (!highlightCursor.isNull())
-            {
-                 found = true;
-                 highlightCursor.movePosition(QTextCursor::WordRight,
-                                              QTextCursor::KeepAnchor);
-                 highlightCursor.mergeCharFormat(colorFormat);
-            }
+                    cursor.beginEditBlock();
+                    colorFormat.setForeground(Qt::red);
+                    while (!highlightCursor.isNull() && !highlightCursor.atEnd()) {
+                        highlightCursor = document->find(textToFind, highlightCursor,
+                                                         QTextDocument::FindWholeWords);
+
+                        if (!highlightCursor.isNull()) {
+                            found = true;
+                            highlightCursor.movePosition(QTextCursor::WordRight,
+                                                         QTextCursor::KeepAnchor);
+                            highlightCursor.mergeCharFormat(colorFormat);
+                        }
+                    }
+
+                    cursor.endEditBlock();
+                    if (found == false) {
+                                QMessageBox::information(this, tr("Word Not Found"),
+                                                         tr("No matches found."));
+                            }
+
         }
+}
 
-        cursor.endEditBlock();
-        isFirstTime = false;
-
-        if (found == false)
+void MainWindow::on_actionChange_font_triggered()
+{
+    QTextCharFormat format;
+        bool ok;
+        QFont font = QFontDialog::getFont(&ok, this);
+        if (ok)
         {
-            QMessageBox::information(this, tr("Word Not Found"),
-                       "No maching.");
+            format.setFont(font);
+            ui->textEdit->textCursor().setCharFormat(format);
+            ui->textEdit->textCursor().clearSelection();
         }
-    }
+        else
+        {
+            ui->textEdit->textCursor().clearSelection();
+        }
 }

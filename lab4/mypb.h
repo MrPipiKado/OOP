@@ -1,13 +1,23 @@
-#ifndef MYPB_H
-#define MYPB_H
-#include <QPushButton>
+#ifndef MYLABLE_H
+#define MYLABLE_H
+#include <QLabel>
 #include <QWidget>
-
-class MYPB : public QPushButton
+#include <Qt>
+class MyLabel : public QLabel
 {
+    Q_OBJECT
 public:
-    MYPB(QWidget* parent = Q_NULLPTR);
+    explicit MyLabel(QWidget* parent = Q_NULLPTR, Qt::WindowFlags f = Qt::WindowFlags());
+    ~MyLabel();
     unsigned int number;
+
+signals:
+    void clicked();
+
+protected:
+    void mousePressEvent(QMouseEvent* event);
+    char Piece;
 };
 
-#endif // MYPB_H
+#endif // MYLABLE_H
+

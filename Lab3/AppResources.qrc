@@ -13,5 +13,6 @@
         <file>Help.jpg</file>
         <file>Find.png</file>
         <file>Logo.png</file>
+        <file>Font.png</file>
     </qresource>
 </RCC>

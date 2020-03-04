@@ -120,15 +120,6 @@ MainWindow::MainWindow(QWidget *parent)
     this->board[6] = ui->label_6;
     this->board[7] = ui->label_7;
     this->board[8] = ui->label_8;
-    this->buttons[0] = ui->pushButton_0;
-    this->buttons[1] = ui->pushButton_1;
-    this->buttons[2] = ui->pushButton_2;
-    this->buttons[3] = ui->pushButton_3;
-    this->buttons[4] = ui->pushButton_4;
-    this->buttons[5] = ui->pushButton_5;
-    this->buttons[6] = ui->pushButton_6;
-    this->buttons[7] = ui->pushButton_7;
-    this->buttons[8] = ui->pushButton_8;
 
     this->ui->line->setVisible(false);
     this->ui->line_2->setVisible(false);
@@ -144,10 +135,9 @@ MainWindow::MainWindow(QWidget *parent)
     this->ui->line_12->setVisible(false);
     for(int i = 0; i<9; ++i)
     {
-        buttons[i]->setVisible(false);
         board[i]->setVisible(false);
-        buttons[i]->number = i;
-        connect(this->buttons[i], SIGNAL(clicked()), this, SLOT(label_clicked()));
+        board[i]->number = i;
+        connect(this->board[i], SIGNAL(clicked()), this, SLOT(label_clicked()));
     }
     connect(this->ui->pushButton, SIGNAL(clicked()), this, SLOT(start()));
 }
@@ -161,7 +151,7 @@ unsigned int MainWindow::label_clicked()
 {
     bool human_move = false;
     QImage image;
-    MYPB *button = (MYPB*)sender();
+    MyLabel *button = (MyLabel*)sender();
     button->setVisible(false);
     unsigned int move = button->number;
     board[move]->setVisible(true);
@@ -244,7 +234,6 @@ unsigned int MainWindow::label_clicked()
                             image.load(":/Images/Zero.png");
                         else
                             image.load(":/Images/Cross.png");
-                        buttons[move]->setVisible(false);
                         board[move]->setVisible(true);
                         image = image.scaledToWidth(board[move]->width(), Qt::SmoothTransformation);
                         board[move]->setPixmap(QPixmap::fromImage(image));
@@ -310,7 +299,6 @@ void MainWindow::start()
     for(int i = 0; i<9; ++i)
     {
         board[i]->setVisible(false);
-        buttons[i]->setVisible(true);
     }
     QImage image;
     image.load(":/Images/Square.png");
@@ -320,7 +308,7 @@ void MainWindow::start()
         board_vect.push_back(' ');
         image = image.scaledToWidth(board[i]->width(), Qt::SmoothTransformation);
         board[i]->setPixmap(QPixmap::fromImage(image));
-        connect(this->buttons[i], SIGNAL(clicked()), this, SLOT(label_clicked()));
+        //connect(this->buttons[i], SIGNAL(clicked()), this, SLOT(label_clicked()));
     }
         QMessageBox::StandardButton resBtn =
                 QMessageBox::question( this, "Hello",
@@ -335,7 +323,6 @@ void MainWindow::start()
             computer = X;
             move = computer_move();
             board[move]->setVisible(true);
-            buttons[move]->setVisible(false);
             board_vect[move] = computer;
             image.load(":/Images/Cross.png");
             image = image.scaledToWidth(board[move]->width(), Qt::SmoothTransformation);

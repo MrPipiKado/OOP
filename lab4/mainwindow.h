@@ -27,8 +27,8 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
-    QLabel *board[9];
-    MYPB *buttons[9];
+    MyLabel *board[9];
+    //MYPB *buttons[9];
     vector<char> board_vect;
     char human;
     char computer;
