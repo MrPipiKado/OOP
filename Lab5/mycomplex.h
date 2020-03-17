@@ -11,9 +11,9 @@ public:
     Complex(double, double);
     ~Complex()= default;
      Complex add (const Complex&);
-     void sub (const Complex&);
-     void mul (const Complex&);
-     void div (const Complex&);
+     Complex sub (const Complex&);
+     Complex mul (const Complex&);
+     Complex div (const Complex&);
      Complex pow (int n);
      Complex root (int n);
      bool eql (const Complex&);
