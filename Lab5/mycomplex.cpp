@@ -53,7 +53,7 @@ void Complex::div(const Complex &a)
     this->trigonometry();
 }
 
-void Complex::pow(int n)
+Complex Complex::pow(int n)
 {
     for(int i = 0; i<n; ++i)
         this->r *= this->r;
@@ -61,7 +61,7 @@ void Complex::pow(int n)
     this->algebra();
 }
 
-void Complex::root(int n)
+Complex Complex::root(int n)
 {
     this->r = std::pow(this->r, 1./n);
     this->fi /= n;

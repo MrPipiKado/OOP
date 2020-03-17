@@ -10,12 +10,12 @@ public:
     Complex(double);
     Complex(double, double);
     ~Complex()= default;
-     void add (const Complex&);
+     Complex add (const Complex&);
      void sub (const Complex&);
      void mul (const Complex&);
      void div (const Complex&);
-     void pow (int n);
-     void root (int n);
+     Complex pow (int n);
+     Complex root (int n);
      bool eql (const Complex&);
      double get_real () const ;
      double get_imagine () const ;
