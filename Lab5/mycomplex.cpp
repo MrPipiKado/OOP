@@ -1,4 +1,5 @@
 #include "mycomplex.h"
+#include <cmath>
 
 Complex::Complex(double a):
 real(a),
@@ -71,13 +72,11 @@ Complex Complex::pow(int n)
 
 Complex Complex::root(int n)
 {
-    Complex res;
-    res.set_real(pow((sqrt(real*real+imagine*imagine)), (1./n))*
-                 cos((imagine/real)/n));
-    double imaginaryRoot = pow((sqrt(real*real+imagine*imagine), 1./base)*sin((imagine/real)/n));
+    double param = imagine/real;
+    double realRoot = std::pow(r, 1./n)*cos(param/n);
+    double imaginaryRoot = std::pow(r, 1./n)*sin(param/n);
     Complex root(realRoot, imaginaryRoot);
     return root;
-    this->algebra();
 }
 
 bool Complex::eql(const Complex &a)
