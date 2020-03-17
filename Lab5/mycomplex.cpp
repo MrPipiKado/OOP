@@ -64,10 +64,11 @@ Complex Complex::div(const Complex &a)
 
 Complex Complex::pow(int n)
 {
-    for(int i = 0; i<n; ++i)
-        this->r *= this->r;
-    this->fi *= n;
-    this->algebra();
+    double param = imagine/real;
+    double realRoot = std::pow(r, n)*cos(param*n);
+    double imaginaryRoot = std::pow(r, n)*sin(param*n);
+    Complex root(realRoot, imaginaryRoot);
+    return root;
 }
 
 Complex Complex::root(int n)

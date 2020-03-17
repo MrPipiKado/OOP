@@ -30,40 +30,32 @@ void MainWindow::on_set_2_clicked()
 
 void MainWindow::on_add_clicked()
 {
-    this->res.set_real(this->op1.get_real());
-    this->res.set_imagine(this->op1.get_imagine());
-    this->res.add(this->op2);
+    res = op1.add(op2);
     ui->res_print->setText(QString::fromStdString("res)" + this->res.get_algebra()));
 }
 
 void MainWindow::on_sub_clicked()
 {
-    this->res.set_real(this->op1.get_real());
-    this->res.set_imagine(this->op1.get_imagine());
-    this->res.sub(this->op2);
+    res = op1.sub(op2);
     ui->res_print->setText(QString::fromStdString("res)" + this->res.get_algebra()));
 }
 
 void MainWindow::on_mul_clicked()
 {
-    this->res.set_real(this->op1.get_real());
-    this->res.set_imagine(this->op1.get_imagine());
-    this->res.mul(this->op2);
+    res = op1.mul(op2);
     ui->res_print->setText(QString::fromStdString("res)" + this->res.get_algebra()));
 }
 
 void MainWindow::on_div_clicked()
 {
-    this->res.set_real(this->op1.get_real());
-    this->res.set_imagine(this->op1.get_imagine());
-    this->res.div(this->op2);
+    res = op1.div(op2);
     ui->res_print->setText(QString::fromStdString("res)" + this->res.get_algebra()));
 }
 
 void MainWindow::on_pow_1_clicked()
 {
-    this->op1.pow((ui->n_1->text()).toInt());
-    ui->op1_print->setText(QString::fromStdString("1)" + this->op1.get_algebra()));
+    res = op1.pow((ui->n_2->text()).toInt());
+    ui->res_print->setText(QString::fromStdString("1)" + this->res.get_algebra()));
 }
 
 void MainWindow::on_algebra_1_clicked()
@@ -99,17 +91,17 @@ void MainWindow::on_trigonom_3_clicked()
 void MainWindow::on_root_1_clicked()
 {
     res = op1.root((ui->n_1->text()).toInt());
-    ui->op1_print->setText(QString::fromStdString("1)" + this->res.get_algebra()));
+    ui->res_print->setText(QString::fromStdString("1)" + this->res.get_algebra()));
 }
 
 void MainWindow::on_pow_2_clicked()
 {
-    this->op2.pow((ui->n_2->text()).toInt());
-    ui->op2_print->setText(QString::fromStdString("2)" + this->op2.get_algebra()));
+    res = op2.pow((ui->n_2->text()).toInt());
+    ui->res_print->setText(QString::fromStdString("2)" + this->res.get_algebra()));
 }
 
 void MainWindow::on_root_2_clicked()
 {
     res = op2.root((ui->n_2->text()).toInt());
-    ui->op2_print->setText(QString::fromStdString("2)" + this->res.get_algebra()));
+    ui->res_print->setText(QString::fromStdString("2)" + this->res.get_algebra()));
 }
