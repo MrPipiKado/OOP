@@ -98,8 +98,8 @@ void MainWindow::on_trigonom_3_clicked()
 
 void MainWindow::on_root_1_clicked()
 {
-    this->op1.root((ui->n_1->text()).toInt());
-    ui->op1_print->setText(QString::fromStdString("1)" + this->op1.get_algebra()));
+    res = op1.root((ui->n_1->text()).toInt());
+    ui->op1_print->setText(QString::fromStdString("1)" + this->res.get_algebra()));
 }
 
 void MainWindow::on_pow_2_clicked()
@@ -110,6 +110,6 @@ void MainWindow::on_pow_2_clicked()
 
 void MainWindow::on_root_2_clicked()
 {
-    this->op2.root((ui->n_2->text()).toInt());
-    ui->op2_print->setText(QString::fromStdString("2)" + this->op2.get_algebra()));
+    res = op2.root((ui->n_2->text()).toInt());
+    ui->op2_print->setText(QString::fromStdString("2)" + this->res.get_algebra()));
 }
