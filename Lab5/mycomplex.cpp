@@ -26,31 +26,39 @@ void Complex::algebra()
     this->imagine = this->r * sin(this->fi);
 }
 
-void Complex::add(const Complex &a)
+Complex Complex::add(const Complex &a)
 {
-    this->real += a.real;
-    this->imagine += a.imagine;
-    this->trigonometry();
+    Complex res;
+    res.set_real(this->real + a.real);
+    res.set_imagine(this->imagine + a.imagine);
+    res.trigonometry();
+    return res;
 }
 
-void Complex::sub(const Complex &a)
+Complex Complex::sub(const Complex &a)
 {
-    this->real -= a.real;
-    this->imagine -= a.imagine;
-    this->trigonometry();
+    Complex res;
+    res.set_real(this->real - a.real);
+    res.set_imagine(this->imagine - a.imagine);
+    res.trigonometry();
+    return res;
 }
 
-void Complex::mul(const Complex &a)
+Complex Complex::mul(const Complex &a)
 {
-    this->real =this->real * a.real - this->imagine * a.imagine;
-    this->imagine = this->real * a.imagine + this->imagine*a.real;
-    this->trigonometry();
+    Complex res;
+    res.set_real(this->real * a.real - this->imagine * a.imagine);
+    res.set_imagine(this->real * a.imagine + this->imagine*a.real);
+    res.trigonometry();
+    return res;
 }
-void Complex::div(const Complex &a)
+Complex Complex::div(const Complex &a)
 {
-    this->real =(this->real * a.real + this->imagine * a.imagine)/(a.real*a.real + a.imagine*a.imagine);
-    this->imagine = (this->imagine * a.real - this->real*a.imagine)/(a.real*a.real + a.imagine*a.imagine);
-    this->trigonometry();
+    Complex res;
+    res.set_real((this->real * a.real + this->imagine * a.imagine)/(a.real*a.real + a.imagine*a.imagine));
+    res.set_imagine((this->imagine * a.real - this->real*a.imagine)/(a.real*a.real + a.imagine*a.imagine));
+    res.trigonometry();
+    return res;
 }
 
 Complex Complex::pow(int n)
@@ -63,8 +71,12 @@ Complex Complex::pow(int n)
 
 Complex Complex::root(int n)
 {
-    this->r = std::pow(this->r, 1./n);
-    this->fi /= n;
+    Complex res;
+    res.set_real(pow((sqrt(real*real+imagine*imagine)), (1./n))*
+                 cos((imagine/real)/n));
+    double imaginaryRoot = pow((sqrt(real*real+imagine*imagine), 1./base)*sin((imagine/real)/n));
+    Complex root(realRoot, imaginaryRoot);
+    return root;
     this->algebra();
 }
 
