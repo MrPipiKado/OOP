@@ -1,10 +1,13 @@
 #include "mycomplex.h"
 #include <cmath>
 
+int Complex::count = 0;
+
 Complex::Complex(double a):
 real(a),
 imagine(0.)
 {
+    ++count;
     this->trigonometry();
 }
 
@@ -12,6 +15,7 @@ Complex::Complex(double a, double b):
 real(a),
 imagine(b)
 {
+    ++count;
     this->trigonometry();
 }
 
@@ -27,48 +31,35 @@ void Complex::algebra()
     this->imagine = this->r * sin(this->fi);
 }
 
-Complex Complex::add(const Complex &a)
+Complex Complex::operator+ (const Complex &op2)
 {
-    Complex res;
-    res.set_real(this->real + a.real);
-    res.set_imagine(this->imagine + a.imagine);
-    res.trigonometry();
-    return res;
+    return Complex(this->real+op2.real,
+                   this->imagine+op2.imagine);
 }
 
-Complex Complex::sub(const Complex &a)
+Complex Complex::operator- (const Complex &op2)
 {
-    Complex res;
-    res.set_real(this->real - a.real);
-    res.set_imagine(this->imagine - a.imagine);
-    res.trigonometry();
-    return res;
+    return Complex(this->real - op2.real,
+                   this->imagine - op2.imagine);
 }
 
-Complex Complex::mul(const Complex &a)
+Complex Complex::operator* (const Complex &op2)
 {
-    Complex res;
-    res.set_real(this->real * a.real - this->imagine * a.imagine);
-    res.set_imagine(this->real * a.imagine + this->imagine*a.real);
-    res.trigonometry();
-    return res;
+    return Complex(this->real * op2.real - this->imagine * op2.imagine,
+                   this->real * op2.imagine + this->imagine * op2.real);
 }
-Complex Complex::div(const Complex &a)
+Complex Complex::operator/ (const Complex &op2)
 {
-    Complex res;
-    res.set_real((this->real * a.real + this->imagine * a.imagine)/(a.real*a.real + a.imagine*a.imagine));
-    res.set_imagine((this->imagine * a.real - this->real*a.imagine)/(a.real*a.real + a.imagine*a.imagine));
-    res.trigonometry();
-    return res;
+    return Complex((this->real * op2.real + this->imagine * op2.imagine)/
+                   (op2.real*op2.real + op2.imagine * op2.imagine),
+                   (this->imagine * op2.real - this->real * op2.imagine)/
+                   (op2.real * op2.real + op2.imagine * op2.imagine));
 }
 
-Complex Complex::pow(int n)
+Complex Complex::operator^ (int n)
 {
-    double param = imagine/real;
-    double realRoot = std::pow(r, n)*cos(param*n);
-    double imaginaryRoot = std::pow(r, n)*sin(param*n);
-    Complex root(realRoot, imaginaryRoot);
-    return root;
+    return Complex(std::pow(r, n) * cos(this->imagine / this->real * n),
+                   std::pow(r, n) * sin(this->imagine / this->real * n));
 }
 
 Complex Complex::root(int n)
@@ -105,6 +96,23 @@ void Complex::set_imagine(double a)
 {
     this->imagine = a;
     this->trigonometry();
+}
+
+void operator<<(QLabel*label, Complex &op)
+{
+    label->setText(QString::number(op.real)+"+("+ QString::number(op.imagine) + ")i");
+}
+
+void operator>>(MyLineEdit * edit, Complex &op)
+{
+    if(edit->ID)
+    {
+        op.set_imagine(edit->text().toDouble());
+    }
+    else
+    {
+        op.set_real(edit->text().toDouble());
+    }
 }
 
 std::string Complex::get_algebra()
