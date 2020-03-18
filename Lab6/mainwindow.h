@@ -48,6 +48,8 @@ private slots:
 
     void on_root_2_clicked();
 
+    void on_compare_clicked();
+
 private:
     Ui::MainWindow *ui;
     Complex op1;

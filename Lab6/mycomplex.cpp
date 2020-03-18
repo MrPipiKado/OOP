@@ -71,9 +71,19 @@ Complex Complex::root(int n)
     return root;
 }
 
-bool Complex::eql(const Complex &a)
+bool Complex::operator== (const Complex& op2)
 {
-    return this->real==a.real && this->imagine==a.imagine;
+    return this->r==op2.r;
+}
+
+bool Complex::operator> (const Complex& op2)
+{
+    return this->r>op2.r;
+}
+
+bool Complex::operator< (const Complex& op2)
+{
+    return this->r<op2.r;
 }
 
 double Complex::get_real() const

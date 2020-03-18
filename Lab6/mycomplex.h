@@ -20,7 +20,9 @@ public:
     Complex operator/ (const Complex& op2);
     Complex operator^ (int n);
     Complex root (int n);
-    bool eql (const Complex& op2);
+    bool operator== (const Complex& op2);
+    bool operator> (const Complex& op2);
+    bool operator< (const Complex& op2);
     double get_real () const ;
     double get_imagine () const ;
     void set_real(double a);

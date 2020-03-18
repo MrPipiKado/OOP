@@ -125,3 +125,19 @@ void MainWindow::on_root_2_clicked()
     ui->res_print->setText(QString::fromStdString("2)" + this->res.get_algebra()));
     ui->statusbar->showMessage("Counter:" + QString::number(op1.get_count()));
 }
+
+void MainWindow::on_compare_clicked()
+{
+    if(op1<op2)
+    {
+        ui->show_compare->setText("1 < 2");
+    }
+    else if(op1>op2)
+    {
+        ui->show_compare->setText("1 > 2");
+    }
+    else if(op1==op2)
+    {
+        ui->show_compare->setText("1 == 2");
+    }
+}

@@ -105,3 +105,13 @@ void MainWindow::on_root_2_clicked()
     res = op2.root((ui->n_2->text()).toInt());
     ui->res_print->setText(QString::fromStdString("2)" + this->res.get_algebra()));
 }
+
+void MainWindow::on_compare_clicked()
+{
+    bool tmp = op1.eql(op2);
+    if(tmp)
+        ui->is_equel->setText("true");
+    else
+        ui->is_equel->setText("false");
+
+}
