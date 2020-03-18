@@ -27,6 +27,7 @@ public:
     void set_imagine(double a);
     friend void operator<<(QLabel* label, Complex &op);
     friend void operator>>(MyLineEdit* edit, Complex &op);
+    static int get_count();
     std::string get_algebra();
     std::string get_trigonometry();
 private:

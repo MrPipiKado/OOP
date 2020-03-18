@@ -115,6 +115,11 @@ void operator>>(MyLineEdit * edit, Complex &op)
     }
 }
 
+int Complex::get_count()
+{
+    return count;
+}
+
 std::string Complex::get_algebra()
 {
     return std::to_string(this->real) + " + (" + std::to_string(this->imagine) + ")i";
