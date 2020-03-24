@@ -15,6 +15,19 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+private slots:
+    void on_set_1_clicked();
+
+    void on_set_2_clicked();
+
+    void on_enter_1_clicked();
+
+    void on_enter_2_clicked();
+
+    void on_add_clicked();
+
+    void on_mul_clicked();
+
 private:
     Ui::MainWindow *ui;
     Matrix op1;

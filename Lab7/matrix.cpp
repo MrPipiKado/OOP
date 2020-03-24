@@ -193,3 +193,26 @@ Matrix & Matrix::operator*=(double &num)
             (*this)[i][j] *=num;
     return *this;
 }
+
+void operator>>(QTableWidget *table, Matrix& op)
+{
+    for(int i = 0; i < table->rowCount(); i++)
+        for(int j = 0; j < table->columnCount(); j++)
+        {
+            op[i][j] = table->item(i,j)->text().toDouble();
+        }
+}
+
+void operator<<(QTextEdit *text, Matrix& op)
+{
+    QString tmp ="";
+    for(int i = 0; i < op.get_rows(); i++)
+    {
+        for(int j = 0; j < op.get_colons(); j++)
+        {
+            tmp += QString::number(op[i][j], 'g', 2) + " ";
+        }
+        tmp += "\n";
+    }
+    text->setText(tmp);
+}

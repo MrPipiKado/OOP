@@ -74,7 +74,14 @@
        </widget>
       </item>
       <item row="2" column="0" rowspan="2" colspan="2">
-       <widget class="QTableWidget" name="input_1"/>
+       <widget class="QTableWidget" name="input_1">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+       </widget>
       </item>
       <item row="2" column="2">
        <widget class="QPushButton" name="add">
@@ -84,7 +91,14 @@
        </widget>
       </item>
       <item row="2" column="3" rowspan="2" colspan="2">
-       <widget class="QTableWidget" name="input_2"/>
+       <widget class="QTableWidget" name="input_2">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+       </widget>
       </item>
       <item row="3" column="2">
        <widget class="QPushButton" name="mul">
@@ -94,7 +108,14 @@
        </widget>
       </item>
       <item row="4" column="1" colspan="3">
-       <widget class="QTextEdit" name="output"/>
+       <widget class="QTextEdit" name="output">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+       </widget>
       </item>
       <item row="0" column="2">
        <widget class="QPushButton" name="set_1">
@@ -112,6 +133,13 @@
       </item>
       <item row="4" column="0">
        <layout class="QVBoxLayout" name="verticalLayout">
+        <item>
+         <widget class="QPushButton" name="enter_1">
+          <property name="text">
+           <string>enter</string>
+          </property>
+         </widget>
+        </item>
         <item>
          <widget class="QLabel" name="label_5">
           <property name="text">
@@ -143,6 +171,13 @@
       </item>
       <item row="4" column="4">
        <layout class="QVBoxLayout" name="verticalLayout_2">
+        <item>
+         <widget class="QPushButton" name="enter_2">
+          <property name="text">
+           <string>enter</string>
+          </property>
+         </widget>
+        </item>
         <item>
          <widget class="QLabel" name="label_6">
           <property name="text">

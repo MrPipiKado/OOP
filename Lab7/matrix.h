@@ -3,6 +3,9 @@
 
 #include <cmath>
 #include <string>
+#include <QTableWidget>
+#include <QTextEdit>
+#include <QString>
 
 class Matrix
 {
@@ -40,6 +43,9 @@ public:
     Matrix&operator-=(double &num);
     Matrix operator*(Matrix& m2);
     Matrix&operator*=(double &num);
+    friend void operator>>(QTableWidget *table, Matrix& op);
+    friend void operator<<(QTableWidget *table, Matrix& op);
+    friend void operator<<(QTextEdit *text, Matrix& op);
 private:
     int rows;
     int colons;
