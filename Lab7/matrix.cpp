@@ -148,7 +148,7 @@ Matrix Matrix::operator+(Matrix &m2)
 }
 
 
-Matrix & Matrix::operator+=(double &num)
+Matrix & Matrix::operator+=(const double &num)
 {
     for(int i = 0; i<rows; ++i)
         for(int j = 0; j<colons; ++j)
@@ -167,7 +167,7 @@ Matrix Matrix::operator-(Matrix &m2)
     return res;
 }
 
-Matrix & Matrix::operator-=(double &num)
+Matrix & Matrix::operator-=(const double &num)
 {
     for(int i = 0; i<rows; ++i)
         for(int j = 0; j<colons; ++j)
@@ -192,7 +192,7 @@ Matrix Matrix::operator*(Matrix &m2)
     return res;
 }
 
-Matrix & Matrix::operator*=(double &num)
+Matrix & Matrix::operator*=(const double &num)
 {
     for(int i = 0; i<rows; ++i)
         for(int j = 0; j<colons; ++j)
@@ -221,4 +221,13 @@ void operator<<(QTextEdit *text, Matrix& op)
         tmp += "\n";
     }
     text->setText(tmp);
+}
+
+void operator<<(QTableWidget *table, Matrix& op)
+{
+    for(int i = 0; i < table->rowCount(); i++)
+        for(int j = 0; j < table->columnCount(); j++)
+        {
+            table->item(i, j)->setText(QString::number(op[i][j]));
+        }
 }

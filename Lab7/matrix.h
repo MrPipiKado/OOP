@@ -37,11 +37,11 @@ public:
          R operator[](int row);
     Matrix& operator=(const Matrix& m2);
     Matrix operator+(Matrix& m2);
-    Matrix&operator+=(double &num);
+    Matrix&operator+=(const double &num);
     Matrix operator-(Matrix& m2);
-    Matrix&operator-=(double &num);
+    Matrix&operator-=(const double &num);
     Matrix operator*(Matrix& m2);
-    Matrix&operator*=(double &num);
+    Matrix&operator*=(const double &num);
     friend void operator>>(QTableWidget *table, Matrix& op);
     friend void operator<<(QTableWidget *table, Matrix& op);
     friend void operator<<(QTextEdit *text, Matrix& op);

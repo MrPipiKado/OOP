@@ -53,3 +53,27 @@ void MainWindow::on_mul_clicked()
     res = op1 * op2;
     ui->output<<res;
 }
+
+void MainWindow::on_add_num_1_clicked()
+{
+    op1 += (ui->num_1->text().toDouble());
+    ui->input_1<<op1;
+}
+
+void MainWindow::on_mil_num_1_clicked()
+{
+    op1 *= (ui->num_1->text().toDouble());
+    ui->input_1<<op1;
+}
+
+void MainWindow::on_add_num_2_clicked()
+{
+    op2 += (ui->num_2->text().toDouble());
+    ui->input_1<<op2;
+}
+
+void MainWindow::on_mul_num_2_clicked()
+{
+    op2 *= (ui->num_2->text().toDouble());
+    ui->input_2<<op2;
+}

@@ -28,6 +28,14 @@ private slots:
 
     void on_mul_clicked();
 
+    void on_add_num_1_clicked();
+
+    void on_mil_num_1_clicked();
+
+    void on_add_num_2_clicked();
+
+    void on_mul_num_2_clicked();
+
 private:
     Ui::MainWindow *ui;
     Matrix op1;
