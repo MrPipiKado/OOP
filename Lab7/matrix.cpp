@@ -20,6 +20,9 @@ Matrix::Matrix(const Matrix &old)
     this->matrix = new double *[this->rows];
     for(int i = 0; i<this->rows; ++i)
         this->matrix[i] = new double [this->colons];
+    for(int i = 0; i<this->rows; ++i)
+        for(int j = 0; j<this->colons; ++j)
+            this->matrix[i][j] = old.at(i, j);
 }
 
 Matrix::~Matrix()
@@ -64,7 +67,7 @@ int Matrix::get_colons() const
     return colons;
 }
 
-double & Matrix::at(int row, int colon)
+double & Matrix::at(int row, int colon) const
 {
     return *(*(matrix + row)+colon);
 }
@@ -112,13 +115,16 @@ Matrix::R Matrix::operator[](int row)
     return R(*this,row);
 }
 
-Matrix& Matrix::operator=(Matrix m2)
+Matrix& Matrix::operator=(const Matrix& m2)
 {
     if(this == &m2)
         return *this;
-    for(int i = 0; i<rows; ++i)
-        delete [] matrix[i];
-    delete [] matrix;
+    if(!matrix)
+    {
+        for (int i = 0; i < rows; ++i)
+            delete[] matrix[i];
+        delete[] matrix;
+    }
     this->rows = m2.get_rows();
     this->colons = m2.get_colons();
     this->matrix = new double *[rows];
@@ -126,7 +132,7 @@ Matrix& Matrix::operator=(Matrix m2)
         this->matrix[i] = new double [colons];
     for(int i = 0; i<rows; ++i)
         for(int j = 0; j<colons; ++j)
-            this->matrix[i][j] = m2[i][j];
+            this->matrix[i][j] = m2.at(i,j);
     return *this;
 }
 

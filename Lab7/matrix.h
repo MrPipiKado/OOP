@@ -29,14 +29,13 @@ public:
     void set_size(int row, int colon);
     int get_rows() const ;
     int get_colons() const ;
-    double& at(int row, int colon);
+    double& at(int row, int colon) const;
     double max();
     double min();
     double max_in_row(int row);
     double min_in_colon(int colon);
-
-    R operator[](int row);
-    Matrix& operator=(Matrix m2);
+         R operator[](int row);
+    Matrix& operator=(const Matrix& m2);
     Matrix operator+(Matrix& m2);
     Matrix&operator+=(double &num);
     Matrix operator-(Matrix& m2);
