@@ -14,6 +14,21 @@ std::string AccountPercent::print()
     return "AccountPercent";
 }
 
+std::string Account::print(std::string smth)
+{
+    return "Account" + smth;
+}
+
+std::string AccountProgressive::print(std::string smth)
+{
+    return "AccountProgressive" + smth;
+}
+
+std::string AccountPercent::print(std::string smth)
+{
+    return "AccountPercent" + smth;
+}
+
 
 Account::Account(const Account &old)
 {
