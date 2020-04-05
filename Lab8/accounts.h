@@ -15,7 +15,8 @@ public:
             name(std::move(name)), surname(std::move(surname)), sum(sum){};;
     Account(const Account& old);
     ~Account()= default;;
-    virtual std::string print();
+    std::string print();
+    std::string print(std::string smth);
 
     std::string get_name() const;
     void set_name(std::string new_name);
@@ -42,7 +43,8 @@ public:
             term(term), percentage(percentage){};
     AccountPercent(const AccountPercent& old);
     ~AccountPercent()= default;;
-    std::string print() override;
+    std::string print();
+    std::string print(std::string smth);
 
     int get_term() const;
     void set_term(int new_term);
@@ -84,7 +86,8 @@ public:
     {
         delete[] percentage;
     }
-    std::string print() override;
+    std::string print();
+    std::string print(std::string smth);
 
     int get_term() const;
     void set_term(int new_term);
