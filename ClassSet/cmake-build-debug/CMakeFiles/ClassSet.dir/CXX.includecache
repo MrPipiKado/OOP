@@ -1,0 +1,26 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/user/OOP/ClassSet/Set.h
+iostream
+-
+
+/home/user/OOP/ClassSet/complex.h
+string
+-
+iostream
+-
+
+/home/user/OOP/ClassSet/main.cpp
+iostream
+-
+Set.h
+/home/user/OOP/ClassSet/Set.h
+complex.h
+/home/user/OOP/ClassSet/complex.h
+

@@ -1,0 +1,1 @@
+/usr/bin/c++  -g   CMakeFiles/ClassSet.dir/main.cpp.o CMakeFiles/ClassSet.dir/Set.cpp.o CMakeFiles/ClassSet.dir/Complex.cpp.o CMakeFiles/ClassSet.dir/complex.cpp.o  -o ClassSet 
